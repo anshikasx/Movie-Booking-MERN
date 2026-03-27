@@ -1,0 +1,256 @@
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1a0006, #050006, #000000);
+    color: #ffffff;
+    font-family: "Segoe UI", sans-serif;
+    min-height: 100vh;
+  }
+  
+  .container {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  
+  .page-title {
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 0.6px;
+  }
+  
+  .sub-text {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .navbar-red {
+    background: linear-gradient(90deg, #ff003c, #7f001d, #120006) !important;
+    box-shadow: 0px 10px 30px rgba(255, 0, 60, 0.25);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 0, 60, 0.18);
+    border-radius: 18px !important;
+    overflow: hidden;
+    transition: 0.3s ease;
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 18px 50px rgba(255, 0, 60, 0.25);
+    border: 1px solid rgba(255, 0, 60, 0.35);
+  }
+  
+  .poster-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .poster-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  
+  .glass-card:hover .poster-img {
+    transform: scale(1.07);
+  }
+  
+  .poster-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 55%;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95),
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0)
+    );
+  }
+  
+  .badge-rating {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 0, 60, 0.35);
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    backdrop-filter: blur(10px);
+  }
+  
+  .neon-btn {
+    background: linear-gradient(90deg, #ff003c, #ff2e63) !important;
+    color: white !important;
+    font-weight: 900 !important;
+    border-radius: 14px !important;
+    padding: 10px 14px !important;
+    text-transform: none !important;
+    letter-spacing: 0.4px;
+    box-shadow: 0px 10px 30px rgba(255, 0, 60, 0.25);
+  }
+  
+  .neon-btn:hover {
+    opacity: 0.92;
+  }
+  
+  .neon-outline {
+    border: 1px solid rgba(255, 0, 60, 0.55) !important;
+    color: white !important;
+    border-radius: 14px !important;
+    font-weight: 800 !important;
+    text-transform: none !important;
+  }
+  
+  .mui-input-dark .MuiOutlinedInput-root {
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    color: white;
+  }
+  
+  .mui-input-dark .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(255, 0, 60, 0.35) !important;
+  }
+  
+  .mui-input-dark label {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+  
+  .screen-bar {
+    background: linear-gradient(90deg, #ff003c, #2b000d);
+    padding: 12px;
+    border-radius: 16px;
+    font-weight: 900;
+    text-align: center;
+    color: white;
+    box-shadow: 0px 12px 40px rgba(255, 0, 60, 0.25);
+  }
+  
+  .seat-btn {
+    width: 46px;
+    height: 40px;
+    border-radius: 12px;
+    font-weight: 800;
+  }
+
+  .mui-input-dark .MuiOutlinedInput-root {
+    border-radius: 14px !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    color: white !important;
+  }
+  
+  .mui-input-dark .MuiOutlinedInput-notchedOutline {
+    border: 1px solid rgba(255, 0, 60, 0.55) !important;
+  }
+  
+  .mui-input-dark .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border: 1px solid rgba(255, 0, 60, 0.85) !important;
+  }
+  
+  .mui-input-dark .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 2px solid rgba(255, 0, 60, 1) !important;
+    box-shadow: 0px 0px 18px rgba(255, 0, 60, 0.35);
+  }
+  
+  .mui-input-dark .MuiInputLabel-root {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+  
+  .mui-input-dark .MuiInputLabel-root.Mui-focused {
+    color: #ff003c !important;
+  }
+ 
+  .mui-input-dark .MuiSvgIcon-root {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  .MuiPaper-root {
+    background-color: #0b0b0b !important;
+    color: white !important;
+    border: 1px solid rgba(255, 0, 60, 0.35) !important;
+  }
+  
+  .MuiMenuItem-root:hover {
+    background-color: rgba(255, 0, 60, 0.2) !important;
+  }
+
+  .price-legend {
+    background: rgba(255, 0, 0, 0.08);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+  }
+  
+  .price-row {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .booking-info {
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+  }
+
+  .legend {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+  
+  .available {
+    border: 1px solid white;
+  }
+  
+  .selected {
+    background: green;
+  }
+  
+  .booked {
+    background: grey;
+  }
+  
+  .price-legend {
+    background: rgba(255, 0, 0, 0.08);
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+  }
+  
+  .booking-info {
+    background: rgba(255,255,255,0.05);
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+  }
+
+  .seat-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid #888;
+    background: transparent;
+    color: white;
+  }
+  
+  .seat-btn:hover {
+    background: #ff1744;
+    border-color: #ff1744;
+  }
+  
+  .seat-selected {
+    background: #00c853;
+    border-color: #00c853;
+  }
+  
+  .seat-booked {
+    background: #555;
+    border-color: #555;
+  }
