@@ -1,0 +1,24 @@
+{
+  "name": "movie-booking-project",
+  "version": "1.0.0",
+  "scripts": {
+    "frontend": "npm start --prefix frontend",
+    "backend": "npm start --prefix backend",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anshikasx/Movie-Booking-MERN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/anshikasx/Movie-Booking-MERN/issues"
+  },
+  "homepage": "https://github.com/anshikasx/Movie-Booking-MERN#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
