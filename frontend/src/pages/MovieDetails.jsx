@@ -9,14 +9,14 @@ export default function MovieDetails() {
   const [bookingCount, setBookingCount] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/api/movies`)
+    fetch(`https://movie-booking-backend-96vw.onrender.com/api/movies`)
       .then(res => res.json())
       .then(data => {
         const m = data.find(x => x._id === id);
         setMovie(m);
       });
 
-    fetch(`http://localhost:5001/api/bookings/count/${id}`)
+    fetch(`https://movie-booking-backend-96vw.onrender.com/api/bookings/count/${id}`)
       .then(res => res.json())
       .then(data => setBookingCount(data.count));
   }, [id]);

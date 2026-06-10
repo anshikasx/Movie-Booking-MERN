@@ -23,7 +23,7 @@ export default function SeatSelection() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/movies")
+    fetch("https://movie-booking-backend-96vw.onrender.com/api/movies")
       .then(res => res.json())
       .then(data => {
         const selectedMovie = data.find(m => m._id === id);

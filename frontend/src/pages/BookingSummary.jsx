@@ -9,7 +9,7 @@ export default function BookingSummary() {
   const { movie, selectedSeats, total, showDate, showTime } = location.state;
 
   const confirmBooking = async () => {
-    await fetch("http://localhost:5001/api/bookings", {
+    await fetch("https://movie-booking-backend-96vw.onrender.com/api/bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

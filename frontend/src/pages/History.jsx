@@ -5,7 +5,7 @@ export default function History() {
   const [bookings, setBookings] = useState([]);
 
   const loadBookings = () => {
-    fetch("http://localhost:5001/api/bookings")
+    fetch("https://movie-booking-backend-96vw.onrender.com/api/bookings")
       .then(res => res.json())
       .then(data => setBookings(data));
   };
@@ -36,7 +36,7 @@ export default function History() {
               color="error"
               onClick={async () => {
                 await fetch(
-                  `http://localhost:5001/api/bookings/${b._id}`,
+                  `https://movie-booking-backend-96vw.onrender.com/api/bookings/${b._id}`,
                   { method: "DELETE" }
                 );
                 loadBookings();
