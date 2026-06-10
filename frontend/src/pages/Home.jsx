@@ -22,11 +22,17 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("All");
 
+  const API_URL = "https://movie-booking-backend-96vw.onrender.com";
+
   useEffect(() => {
-    fetch("http://localhost:5001/api/movies")
-      .then(res => res.json())
-      .then(data => setMovies(data))
-      .catch(err => console.error('Failed to fetch movies:', err));
+    fetch(`${API_URL}/api/movies`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch movies:", err);
+      });
   }, []);
 
   const genres = ["All", ...new Set(movies.map(m => m.genre))];
