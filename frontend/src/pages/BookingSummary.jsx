@@ -1,55 +1,145 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Card } from "@mui/material";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+import {
+  Box, Typography, Button, Card, CardContent,
+  Divider, CircularProgress, Chip
+} from "@mui/material";
+import {
+  LocalMovies, EventSeat, CalendarToday,
+  AccessTime, CurrencyRupee, CheckCircle
+} from "@mui/icons-material";
 
 export default function BookingSummary() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { token } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const { movie, selectedSeats, total, showDate, showTime } = location.state;
 
   const confirmBooking = async () => {
-    await fetch("https://movie-booking-backend-96vw.onrender.com/api/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        movieId: movie._id,
-        movieTitle: movie.title,
-        seats: selectedSeats,
-        totalAmount: total,
-        showDate,
-        showTime
-      })
-    });
+    setLoading(true);
+    setError('');
+    try {
+      await axios.post(
+        "http://localhost:5001/api/bookings",
+        {
+          movieId: movie._id,
+          movieTitle: movie.title,
+          seats: selectedSeats,
+          totalAmount: total,
+          showDate,
+          showTime
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    navigate("/confirmation", {
-      state: {
-        movieTitle: movie.title,
-        seats: selectedSeats,
-        totalAmount: total,
-        showDate,
-        showTime
-      }
-    });
+      navigate("/confirmation", {
+        state: { movieTitle: movie.title, seats: selectedSeats, totalAmount: total, showDate, showTime }
+      });
+    } catch (err) {
+      setError("Booking failed. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="container mt-4">
-      <h3>Booking Summary</h3>
+    <Box sx={{
+      minHeight: '100vh',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #110000 100%)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      px: 2, py: 6
+    }}>
+      <Box sx={{ width: '100%', maxWidth: 500 }}>
+        <Typography variant="h4" fontWeight="900" color="white" mb={4}
+          sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <LocalMovies sx={{ color: '#e50914' }} /> Booking Summary
+        </Typography>
 
-      <Card className="p-4">
-        <p>Movie: {movie.title}</p>
-        <p>Seats: {selectedSeats.join(", ")}</p>
-        <p>Date: {showDate}</p>
-        <p>Time: {showTime}</p>
-        <p>Total: ₹{total}</p>
+        <Card sx={{
+          background: 'rgba(20,20,20,0.95)',
+          border: '1px solid rgba(229,9,20,0.3)',
+          borderRadius: 3
+        }}>
+          <CardContent sx={{ p: 4 }}>
 
-        <Button variant="contained" onClick={confirmBooking}>
-          Confirm Booking
-        </Button>
-      </Card>
-    </div>
+            {/* Movie title */}
+            <Typography variant="h5" fontWeight="900" color="white" mb={3}>
+              {movie.title}
+            </Typography>
+
+            <Divider sx={{ borderColor: 'rgba(229,9,20,0.2)', mb: 3 }} />
+
+            {/* Details */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, mb: 3 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <EventSeat sx={{ color: '#e50914' }} />
+                <Box>
+                  <Typography variant="caption" color="#666">Seats</Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
+                    {selectedSeats.map(seat => (
+                      <Chip key={seat} label={seat} size="small"
+                        sx={{ background: 'rgba(229,9,20,0.2)', color: '#ff8a80',
+                          border: '1px solid rgba(229,9,20,0.4)', fontWeight: 700 }} />
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <CalendarToday sx={{ color: '#e50914' }} />
+                <Box>
+                  <Typography variant="caption" color="#666">Date</Typography>
+                  <Typography variant="body1" color="white" fontWeight="600">{showDate}</Typography>
+                </Box>
+              </Box>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <AccessTime sx={{ color: '#e50914' }} />
+                <Box>
+                  <Typography variant="caption" color="#666">Show Time</Typography>
+                  <Typography variant="body1" color="white" fontWeight="600">{showTime}</Typography>
+                </Box>
+              </Box>
+            </Box>
+
+            <Divider sx={{ borderColor: 'rgba(229,9,20,0.2)', mb: 3 }} />
+
+            {/* Total */}
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+              <Typography variant="h6" color="#aaa">Total Amount</Typography>
+              <Typography variant="h5" fontWeight="900" color="white"
+                sx={{ display: 'flex', alignItems: 'center' }}>
+                <CurrencyRupee sx={{ fontSize: 22 }} />{total}
+              </Typography>
+            </Box>
+
+            {error && (
+              <Typography color="#ff6b6b" variant="body2" mb={2} textAlign="center">
+                {error}
+              </Typography>
+            )}
+
+            <Button fullWidth variant="contained" size="large"
+              onClick={confirmBooking} disabled={loading}
+              startIcon={loading ? <CircularProgress size={18} color="inherit" /> : <CheckCircle />}
+              sx={{
+                py: 1.8, fontWeight: 800, fontSize: '1rem',
+                background: 'linear-gradient(135deg, #e50914, #b20710)',
+                borderRadius: 2,
+                '&:hover': { background: 'linear-gradient(135deg, #ff1a1a, #e50914)' }
+              }}>
+              {loading ? 'Confirming...' : 'Confirm Booking'}
+            </Button>
+
+          </CardContent>
+        </Card>
+      </Box>
+    </Box>
   );
 }
