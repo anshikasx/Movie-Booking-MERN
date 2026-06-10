@@ -1,17 +1,19 @@
+require("dotenv").config();
+
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
+
+const connectDB = require("./config/db");
 
 const movieRoutes = require("./routes/movieRoutes");
 const bookingRoutes = require("./routes/bookings");
 
 const app = express();
 
+connectDB();
+
 app.use(cors());
 app.use(express.json());
-
-mongoose.connect("mongodb://127.0.0.1:27017/moviebooking")
-  .then(() => console.log("MongoDB Connected"));
 
 app.use("/api/movies", movieRoutes);
 app.use("/api/bookings", bookingRoutes);
